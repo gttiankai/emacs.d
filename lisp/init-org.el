@@ -37,7 +37,7 @@
       org-export-kill-product-buffer-when-displayed t
       org-export-odt-preferred-output-format "doc"
       org-tags-column 80
-      ;; org-startup-indented t
+      org-startup-indented t
       )
 
 ;; Refile targets include this file and any file contributing to the agenda - up to 5 levels deep

@@ -172,6 +172,16 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(window-numbering-face ((t (:foreground "DeepPink" :underline "DeepPink" :weight bold))) t))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(blink-cursor-mode nil)
+ '(column-number-mode t)
+ '(display-time-mode t)
+ '(session-use-package t nil (session))
+ '(tool-bar-mode nil))
 ;;; Local Variables:
 ;;; no-byte-compile: t
 ;;; End:
@@ -184,3 +194,9 @@
   (message "format successfully"))
 ;;绑定到F7键
 (global-set-key [f7] 'indent-whole)
+
+;; refresh the file 
+(defun refresh-file ()
+  (interactive)
+  (revert-buffer t (not (buffer-modified-p)) t))
+(global-set-key [(control f5)] 'refresh-file)
