@@ -131,7 +131,8 @@
 ;; need statistics of keyfreq asap
 (require 'init-keyfreq)
 
-
+;; fci-mode
+;;(require 'fill-column-indicator)
 ;; misc has some crucial tools I need immediately
 (require 'init-misc)
 
@@ -195,8 +196,17 @@
 ;;绑定到F7键
 (global-set-key [f7] 'indent-whole)
 
-;; refresh the file 
+;; refresh the file
 (defun refresh-file ()
   (interactive)
   (revert-buffer t (not (buffer-modified-p)) t))
 (global-set-key [(control f5)] 'refresh-file)
+
+;;; config by tiankai clear the buffer in the shell mode
+(add-hook 'shell-mode-hook 'my-shell-mode-hook) 
+(defun my-shell-mode-hook ()
+  (local-set-key (kbd "C-l") (lambda nil (interactive) (erase-buffer) (comint-send-input))) 
+  )
+;; fci-mode add-hook
+;; (add-hook 'org-mode-hook 'fci-mode)
+
