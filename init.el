@@ -133,6 +133,9 @@
 
 ;; fci-mode
 ;;(require 'fill-column-indicator)
+
+;; org2markdown
+;;(require `init-org2markdown.el)
 ;; misc has some crucial tools I need immediately
 (require 'init-misc)
 
@@ -210,3 +213,6 @@
 ;; fci-mode add-hook
 ;; (add-hook 'org-mode-hook 'fci-mode)
 
+;; make org exoport to markdown
+(eval-after-load "org"
+  '(require 'ox-md nil t))
