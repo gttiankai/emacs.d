@@ -24,17 +24,17 @@
                    (t nil)
                    ))
 
-;----------------------------------------------------------------------------
-; Functions (load all files in defuns-dir)
-; Copied from https://github.com/magnars/.emacs.d/blob/master/init.el
-;----------------------------------------------------------------------------
+                                        ;----------------------------------------------------------------------------
+                                        ; Functions (load all files in defuns-dir)
+                                        ; Copied from https://github.com/magnars/.emacs.d/blob/master/init.el
+                                        ;----------------------------------------------------------------------------
 (setq defuns-dir (expand-file-name "~/.emacs.d/defuns"))
 (dolist (file (directory-files defuns-dir t "\\w+"))
   (when (file-regular-p file)
-      (load file)))
-;----------------------------------------------------------------------------
-; Load configs for specific features and modes
-;----------------------------------------------------------------------------
+    (load file)))
+                                        ;----------------------------------------------------------------------------
+                                        ; Load configs for specific features and modes
+                                        ;----------------------------------------------------------------------------
 (require 'init-modeline)
 
 ;;----------------------------------------------------------------------------
@@ -168,10 +168,9 @@
 (if (file-exists-p "~/.custom.el") (load-file "~/.custom.el"))
 
 (when (require 'time-date nil t)
-   (message "Emacs startup time: %d seconds."
-    (time-to-seconds (time-since emacs-load-start-time)))
-   )
-
+  (message "Emacs startup time: %d seconds."
+           (time-to-seconds (time-since emacs-load-start-time)))
+  )
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -208,7 +207,7 @@
 (global-set-key [f5] 'refresh-file)
 
 ;;; config by tiankai clear the buffer in the shell mode
-(add-hook 'shell-mode-hook 'my-shell-mode-hook) 
+(add-hook 'shell-mode-hook 'my-shell-mode-hook)
 (defun my-shell-mode-hook ()
   (local-set-key (kbd "C-l") (lambda nil (interactive) (erase-buffer) (comint-send-input))) 
   )
