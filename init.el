@@ -109,7 +109,9 @@
 (require 'init-which-func)
 (require 'init-move-window-buffer)
 ;; (require 'init-gist)
-(require 'init-moz)
+
+;; config firefox Mozrepl
+;; (require 'init-moz)
 (require 'init-gtags)
 ;; use evil mode (vi key binding)
 ;;(require 'init-evil)
@@ -203,7 +205,7 @@
 (defun refresh-file ()
   (interactive)
   (revert-buffer t (not (buffer-modified-p)) t))
-(global-set-key [(control f5)] 'refresh-file)
+(global-set-key [f5] 'refresh-file)
 
 ;;; config by tiankai clear the buffer in the shell mode
 (add-hook 'shell-mode-hook 'my-shell-mode-hook) 
