@@ -9,7 +9,7 @@
 (defun increment-default-font-height (delta)
   "Adjust the default font height by DELTA on every frame.
 The pixel size of the frame is kept (approximately) the same.
-DELTA should be a multiple of 10, in the units used by the
+DELTA should be a Multiple of 10, in the units used by the
 :height face attribute."
   (let* ((new-height (+ (face-attribute 'default :height) delta))
          (new-point-height (/ new-height 10)))

@@ -24,17 +24,17 @@
                    (t nil)
                    ))
 
-;----------------------------------------------------------------------------
-; Functions (load all files in defuns-dir)
-; Copied from https://github.com/magnars/.emacs.d/blob/master/init.el
-;----------------------------------------------------------------------------
+                                        ;----------------------------------------------------------------------------
+                                        ; Functions (load all files in defuns-dir)
+                                        ; Copied from https://github.com/magnars/.emacs.d/blob/master/init.el
+                                        ;----------------------------------------------------------------------------
 (setq defuns-dir (expand-file-name "~/.emacs.d/defuns"))
 (dolist (file (directory-files defuns-dir t "\\w+"))
   (when (file-regular-p file)
-      (load file)))
-;----------------------------------------------------------------------------
-; Load configs for specific features and modes
-;----------------------------------------------------------------------------
+    (load file)))
+                                        ;----------------------------------------------------------------------------
+                                        ; Load configs for specific features and modes
+                                        ;----------------------------------------------------------------------------
 (require 'init-modeline)
 
 ;;----------------------------------------------------------------------------
@@ -131,7 +131,11 @@
 ;; need statistics of keyfreq asap
 (require 'init-keyfreq)
 
+;; fci-mode
+;;(require 'fill-column-indicator)
 
+;; org2markdown
+;;(require `init-org2markdown.el)
 ;; misc has some crucial tools I need immediately
 (require 'init-misc)
 
@@ -162,7 +166,52 @@
 (if (file-exists-p "~/.custom.el") (load-file "~/.custom.el"))
 
 (when (require 'time-date nil t)
-   (message "Emacs startup time: %d seconds."
-    (time-to-seconds (time-since emacs-load-start-time)))
-   )
+  (message "Emacs startup time: %d seconds."
+           (time-to-seconds (time-since emacs-load-start-time)))
+  )
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(window-numbering-face ((t (:foreground "DeepPink" :underline "DeepPink" :weight bold))) t))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(blink-cursor-mode nil)
+ '(column-number-mode t)
+ '(display-time-mode t)
+ '(session-use-package t nil (session))
+ '(tool-bar-mode nil))
+;;; Local Variables:
+;;; no-byte-compile: t
+;;; End:
+(put 'erase-buffer 'disabled nil)
 
+;;格式化整个文件函数
+(defun indent-whole ()
+  (interactive)
+  (indent-region (point-min) (point-max))
+  (message "format successfully"))
+;;绑定到F7键
+(global-set-key [f7] 'indent-whole)
+
+;; refresh the file
+(defun refresh-file ()
+  (interactive)
+  (revert-buffer t (not (buffer-modified-p)) t))
+(global-set-key [f5] 'refresh-file)
+
+;;; config by tiankai clear the buffer in the shell mode
+(add-hook 'shell-mode-hook 'my-shell-mode-hook)
+(defun my-shell-mode-hook ()
+  (local-set-key (kbd "C-l") (lambda nil (interactive) (erase-buffer) (comint-send-input))) 
+  )
+;; fci-mode add-hook
+;; (add-hook 'org-mode-hook 'fci-mode)
+
+;; make org exoport to markdown
+(eval-after-load "org"
+  '(require 'ox-md nil t))
